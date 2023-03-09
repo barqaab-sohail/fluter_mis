@@ -4,6 +4,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../controllers/asset/SearchAsset.dart';
 import '../drawer/Drawer.dart';
 
 class AssetList extends StatefulWidget {
@@ -21,6 +22,14 @@ class _AssetListState extends State<AssetList> {
         appBar: AppBar(
           centerTitle: true,
           title: Text('Asset List'),
+          actions: [
+            IconButton(
+              onPressed: () {
+                showSearch(context: context, delegate: SearchAsset());
+              },
+              icon: Icon(Icons.search_sharp),
+            )
+          ],
         ),
         drawer: HomeDrawer(),
         body: Column(children: [
