@@ -130,30 +130,44 @@ class LoginController extends GetxController {
     }
   }
 
-  static logout() async {
+  static logout({String? email, String? authToken}) async {
     final prefs = await SharedPreferences.getInstance();
+    Map<String, String> requestHeaders = {
+      'content-Type': 'application/json',
+      'Authorization': 'Bearer ' + prefs.getString('token').toString(),
+    };
+    var body = json.encode({"email": email});
+    var url = Uri.parse(BaseAPI.baseURL + EndPoints.logout);
+    http.Response response =
+        await http.post(url, headers: requestHeaders, body: body);
+
     String employeeList = FileName.employeeList;
     String projectList = FileName.projectList;
     String assetList = FileName.assetList;
+    print(response.statusCode);
+    if (response.statusCode == 200) {
+      var dir = await getTemporaryDirectory();
 
-    var dir = await getTemporaryDirectory();
-    final employeeFile = await File(dir.path + "/" + employeeList);
-    if (employeeFile.existsSync()) {
-      await employeeFile.delete();
-    }
+      final employeeFile = await File(dir.path + "/" + employeeList);
+      if (employeeFile.existsSync()) {
+        await employeeFile.delete();
+      }
 
-    final projectFile = await File(dir.path + "/" + projectList);
-    if (projectFile.existsSync()) {
-      await projectFile.delete();
-    }
+      final projectFile = await File(dir.path + "/" + projectList);
+      if (projectFile.existsSync()) {
+        await projectFile.delete();
+      }
 
-    final assetFile = await File(dir.path + "/" + assetList);
-    if (assetFile.existsSync()) {
-      print('delete asset list');
-      await assetFile.delete();
-    }
-
-    prefs.clear();
-    Get.off(() => LoginScreen());
+      final assetFile = await File(dir.path + "/" + assetList);
+      if (assetFile.existsSync()) {
+        print('delete asset list');
+        await assetFile.delete();
+      }
+      prefs.clear();
+      Get.off(() => LoginScreen(), arguments: [
+        {"first": 'First data'},
+        {"second": 'Second data'}
+      ]);
+    } else {}
   }
 }

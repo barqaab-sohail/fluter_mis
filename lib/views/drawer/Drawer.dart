@@ -22,6 +22,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
   String userDesignation = '';
   String pictureUrl = '';
   String email = '';
+  String token = '';
 
   final employeListController = Get.put(EmployeListController());
 
@@ -34,6 +35,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
       userDesignation = prefs.getString('userDesignation')!;
       pictureUrl = prefs.getString('pictureUrl')!;
       email = prefs.getString('email')!;
+      token = prefs.getString('token')!;
       print(prefs.getString('token'));
     });
   }
@@ -116,8 +118,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
               ),
               IconButton(
                   onPressed: () {
-                    userPreference.removeUser();
-                    LoginController.logout();
+                    LoginController.logout(email: email, authToken: token);
                   },
                   icon: Icon(Icons.logout)),
             ],
