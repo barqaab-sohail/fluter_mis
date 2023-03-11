@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:first_project/utils/api/BaseAPI.dart';
 import 'package:first_project/views/auth/LoginScreen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -98,6 +99,7 @@ class LoginController extends GetxController {
         Get.to(() => DashBoardScreen());
         //Get.off(HomeScreen());
       } else {
+        Get.to(() => LoginScreen());
         throw jsonDecode(response.body)["message"] ?? "Unknown Error Occured";
       }
     } catch (error) {
@@ -151,11 +153,13 @@ class LoginController extends GetxController {
       final employeeFile = await File(dir.path + "/" + employeeList);
       if (employeeFile.existsSync()) {
         await employeeFile.delete();
+        print('delete employee file');
       }
 
       final projectFile = await File(dir.path + "/" + projectList);
       if (projectFile.existsSync()) {
         await projectFile.delete();
+        print('delete proejct file');
       }
 
       final assetFile = await File(dir.path + "/" + assetList);
@@ -168,6 +172,7 @@ class LoginController extends GetxController {
         {"first": 'First data'},
         {"second": 'Second data'}
       ]);
+      SystemNavigator.pop();
     } else {}
   }
 }
