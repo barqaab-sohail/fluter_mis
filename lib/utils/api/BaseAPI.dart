@@ -1,6 +1,10 @@
 class BaseAPI {
   static final String baseURL = "http://localhost/hrms/public/api/";
   //"https://www.barqaab.pk/hrms/public/api/";
+<<<<<<< HEAD
+=======
+  //
+>>>>>>> 99f304e8dbd9fd870ff09f0208c274f848d970c5
   //
 }
 

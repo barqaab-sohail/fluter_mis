@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:first_project/controllers/hr/EmployeeListController.dart';
 import 'package:first_project/controllers/hr/SearchEmployee.dart';
 import 'package:first_project/model/hr/EmployeeModel.dart';
@@ -14,15 +16,29 @@ class EmployeeList extends StatefulWidget {
 }
 
 class _EmployeeListState extends State<EmployeeList> {
+  // Timer? timer;
+
   @override
   void initState() {
     super.initState();
   }
 
+<<<<<<< HEAD
   final employeeListController = Get.put(EmployeeListController());
+=======
+  @override
+  void dispose() {
+    // timer?.cancel();
+    super.dispose();
+  }
+
+  final employeeListController = Get.put(EmployeListController());
+>>>>>>> 99f304e8dbd9fd870ff09f0208c274f848d970c5
 
   @override
   Widget build(BuildContext context) {
+    // timer = Timer.periodic(Duration(seconds: 50),
+    //     (Timer t) => employeeListController.getNewEmployeeList());
     return Scaffold(
         appBar: AppBar(
           centerTitle: true,
@@ -51,6 +67,7 @@ class _EmployeeListState extends State<EmployeeList> {
                   itemBuilder: (BuildContext context, int index) => Card(
                     elevation: 1,
                     margin: const EdgeInsets.symmetric(vertical: 2),
+<<<<<<< HEAD
                     child: ListTile(
                       onTap: () {
                         Get.to(EmployeeDocumentList(), arguments: [
@@ -63,6 +80,14 @@ class _EmployeeListState extends State<EmployeeList> {
                         backgroundImage:
                             NetworkImage(snapshot.data![index].picture!),
                         backgroundColor: Colors.transparent,
+=======
+                    child: InteractiveViewer(
+                        child: ListTile(
+                      leading: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: Image.network(snapshot.data![index].picture!,
+                            fit: BoxFit.cover),
+>>>>>>> 99f304e8dbd9fd870ff09f0208c274f848d970c5
                       ),
                       title: Text(snapshot.data![index].fullName!),
                       subtitle: Column(
@@ -80,7 +105,7 @@ class _EmployeeListState extends State<EmployeeList> {
                               snapshot.data![index].status!),
                         ],
                       ),
-                    ),
+                    )),
                   ),
 
                   // {

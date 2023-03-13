@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:first_project/utils/api/BaseAPI.dart';
 import 'package:first_project/views/auth/LoginScreen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
@@ -82,6 +83,7 @@ class LoginController extends GetxController {
 
         Get.to(() => DashBoardScreen());
       } else {
+        Get.to(() => LoginScreen());
         throw jsonDecode(response.body)["message"] ?? "Unknown Error Occured";
       }
     } catch (error) {
@@ -127,10 +129,11 @@ class LoginController extends GetxController {
     print(response.statusCode);
     if (response.statusCode == 200) {
       prefs.clear();
-      Get.off(() => LoginScreen());
-    } else {
-      Get.off(() => LoginScreen());
-      throw jsonDecode(response.body)["message"] ?? "Unknown Error Occured";
-    }
+      Get.off(() => LoginScreen(), arguments: [
+        {"first": 'First data'},
+        {"second": 'Second data'}
+      ]);
+      SystemNavigator.pop();
+    } else {}
   }
 }
