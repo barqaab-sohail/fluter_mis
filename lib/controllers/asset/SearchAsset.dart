@@ -1,4 +1,4 @@
-import 'package:first_project/modal/asset/AssetModal.dart';
+import 'package:first_project/model/asset/AssetModel.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';

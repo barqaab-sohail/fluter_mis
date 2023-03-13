@@ -1,5 +1,5 @@
 import 'package:first_project/controllers/asset/AssetListController.dart';
-import 'package:first_project/modal/asset/AssetModal.dart';
+import 'package:first_project/model/asset/AssetModel.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter/material.dart';

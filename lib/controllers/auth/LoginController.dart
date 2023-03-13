@@ -1,21 +1,14 @@
 import 'dart:convert';
-import 'dart:io';
-
 import 'package:first_project/utils/api/BaseAPI.dart';
 import 'package:first_project/views/auth/LoginScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
-import 'package:first_project/modal/UserModal.dart';
+import 'package:first_project/model/UserModal.dart';
 import 'package:first_project/views/dashboard/Dashboard.dart';
 
-import '../../utils/FileName.dart';
-
 class LoginController extends GetxController {
-  //GlobalKey<FormState> loginFormKey = GlobalKey<FormState>();
-
   late TextEditingController emailController, passwordController;
 
   final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
@@ -57,14 +50,6 @@ class LoginController extends GetxController {
     return null;
   }
 
-  // void checkLogin() {
-  //   final isValid = loginFormKey.currentState!.validate();
-  //   if (!isValid) {
-  //     return;
-  //   }
-  //   loginFormKey.currentState!.save();
-  // }
-
   Future<void> loginWithEmail({@required formkey}) async {
     final isValid = formkey.currentState!.validate();
     if (!isValid) {
@@ -96,7 +81,6 @@ class LoginController extends GetxController {
         passwordController.clear();
 
         Get.to(() => DashBoardScreen());
-        //Get.off(HomeScreen());
       } else {
         throw jsonDecode(response.body)["message"] ?? "Unknown Error Occured";
       }
@@ -140,34 +124,13 @@ class LoginController extends GetxController {
     var url = Uri.parse(BaseAPI.baseURL + EndPoints.logout);
     http.Response response =
         await http.post(url, headers: requestHeaders, body: body);
-
-    String employeeList = FileName.employeeList;
-    String projectList = FileName.projectList;
-    String assetList = FileName.assetList;
     print(response.statusCode);
     if (response.statusCode == 200) {
-      var dir = await getTemporaryDirectory();
-
-      final employeeFile = await File(dir.path + "/" + employeeList);
-      if (employeeFile.existsSync()) {
-        await employeeFile.delete();
-      }
-
-      final projectFile = await File(dir.path + "/" + projectList);
-      if (projectFile.existsSync()) {
-        await projectFile.delete();
-      }
-
-      final assetFile = await File(dir.path + "/" + assetList);
-      if (assetFile.existsSync()) {
-        print('delete asset list');
-        await assetFile.delete();
-      }
       prefs.clear();
-      Get.off(() => LoginScreen(), arguments: [
-        {"first": 'First data'},
-        {"second": 'Second data'}
-      ]);
-    } else {}
+      Get.off(() => LoginScreen());
+    } else {
+      Get.off(() => LoginScreen());
+      throw jsonDecode(response.body)["message"] ?? "Unknown Error Occured";
+    }
   }
 }

@@ -1,6 +1,7 @@
 import 'package:first_project/controllers/hr/EmployeeListController.dart';
 import 'package:first_project/controllers/hr/SearchEmployee.dart';
-import 'package:first_project/modal/hr/EmployeeModal.dart';
+import 'package:first_project/model/hr/EmployeeModel.dart';
+import 'package:first_project/views/hr/EmployeeDocumentList.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../drawer/Drawer.dart';
@@ -18,7 +19,7 @@ class _EmployeeListState extends State<EmployeeList> {
     super.initState();
   }
 
-  final employeeListController = Get.put(EmployeListController());
+  final employeeListController = Get.put(EmployeeListController());
 
   @override
   Widget build(BuildContext context) {
@@ -37,21 +38,6 @@ class _EmployeeListState extends State<EmployeeList> {
         ),
         drawer: HomeDrawer(),
         body: Column(children: [
-          // TextField(
-          //   onChanged: (value) =>
-          //       employeeListController.EmployeeList(query: value),
-          //   decoration: InputDecoration(
-          //     contentPadding:
-          //         const EdgeInsets.symmetric(vertical: 10.0, horizontal: 15),
-          //     hintText: "Search",
-          //     suffixIcon: const Icon(Icons.search),
-          //     // prefix: Icon(Icons.search),
-          //     border: OutlineInputBorder(
-          //       borderRadius: BorderRadius.circular(20.0),
-          //       borderSide: const BorderSide(),
-          //     ),
-          //   ),
-          // ),
           const SizedBox(
             height: 20,
           ),
@@ -66,6 +52,12 @@ class _EmployeeListState extends State<EmployeeList> {
                     elevation: 1,
                     margin: const EdgeInsets.symmetric(vertical: 2),
                     child: ListTile(
+                      onTap: () {
+                        Get.to(EmployeeDocumentList(), arguments: [
+                          snapshot.data![index].id,
+                          snapshot.data![index].fullName
+                        ]);
+                      },
                       leading: CircleAvatar(
                         radius: 20.0,
                         backgroundImage:

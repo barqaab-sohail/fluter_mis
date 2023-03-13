@@ -1,6 +1,6 @@
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../../modal/UserModal.dart';
+import '../../model/UserModal.dart';
 
 class UserPreference {
   String? token;

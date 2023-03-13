@@ -9,6 +9,6 @@ class InitialBinding extends Bindings {
     // here we init our controllers or initial things
     Get.lazyPut(() => LoginController());
     Get.lazyPut(() => DashboardController());
-    Get.lazyPut(() => EmployeListController());
+    Get.lazyPut(() => EmployeeListController());
   }
 }

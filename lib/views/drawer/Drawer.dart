@@ -24,7 +24,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
   String email = '';
   String token = '';
 
-  final employeListController = Get.put(EmployeListController());
+  final employeListController = Get.put(EmployeeListController());
 
   UserPreference userPreference = UserPreference();
 

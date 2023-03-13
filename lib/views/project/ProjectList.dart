@@ -1,6 +1,6 @@
 import 'package:first_project/controllers/project/ProjectListController.dart';
 import 'package:first_project/controllers/project/searchProject.dart';
-import 'package:first_project/modal/project/ProjectListModal.dart';
+import 'package:first_project/model/project/ProjectListModel.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../drawer/Drawer.dart';
