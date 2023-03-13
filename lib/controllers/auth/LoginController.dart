@@ -150,12 +150,6 @@ class LoginController extends GetxController {
     if (response.statusCode == 200) {
       var dir = await getTemporaryDirectory();
 
-      final employeeFile = await File(dir.path + "/" + employeeList);
-      if (employeeFile.existsSync()) {
-        await employeeFile.delete();
-        print('delete employee file');
-      }
-
       final projectFile = await File(dir.path + "/" + projectList);
       if (projectFile.existsSync()) {
         await projectFile.delete();
